@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -56,8 +55,13 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI(sandwich);
+        // Modified this so that a loading image comes up as a placeholder
+        // while the main image loads. If it doesn't load, the error
+        // image that is assigned is displayed. 
         Picasso.with(this)
                 .load(sandwich.getImage())
+                .placeholder(R.drawable.loading_circle)
+                .error(R.drawable.stock_image_not_available)
                 .into(mBinding.imageIv);
 
         setTitle(sandwich.getMainName());
@@ -68,6 +72,14 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Populates the DetailActivity UI given a sandwich
+     * This method orginially had no Sandwich parameter,
+     * I modified it for use with data binding.
+     *
+     * @param  sandwich the Sandwich object that will be binded to the UI.
+     * @return
+     */
     private void populateUI(Sandwich sandwich) {
         mBinding.descriptionTv.setText(sandwich.getDescription());
         mBinding.ingredientsTv.setText(sandwich.getIngredients().toString().replaceAll("[\\[\\]]", ""));
@@ -75,6 +87,8 @@ public class DetailActivity extends AppCompatActivity {
         String placeOfOrigin = sandwich.getPlaceOfOrigin();
         List<String> alsoKnownAs = sandwich.getAlsoKnownAs();
 
+        //Checks to see if any useful info is available for these two details
+        //If not, the corresponding textView and label are set to invisible.
         if (placeOfOrigin.isEmpty()) {
             mBinding.originTv.setVisibility(View.INVISIBLE);
             mBinding.textView4.setVisibility(View.INVISIBLE);

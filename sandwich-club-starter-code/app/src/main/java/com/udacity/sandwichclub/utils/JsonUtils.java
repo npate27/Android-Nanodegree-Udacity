@@ -47,7 +47,7 @@ public class JsonUtils {
      */
     private static List<String> jsonArrToList(JSONArray jsonArray) throws JSONException {
         List<String> stringList = new ArrayList<>();
-        for(int i = 0; i < jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             stringList.add(jsonArray.getString(i));
         }
         return stringList;

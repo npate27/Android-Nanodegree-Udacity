@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.json.JSONException;
+
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -66,9 +69,24 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI(Sandwich sandwich) {
-        mBinding.alsoKnownTv.setText(sandwich.getAlsoKnownAs().toString().replaceAll("[\\[\\]]", ""));
         mBinding.descriptionTv.setText(sandwich.getDescription());
         mBinding.ingredientsTv.setText(sandwich.getIngredients().toString().replaceAll("[\\[\\]]", ""));
-        mBinding.originTv.setText(sandwich.getPlaceOfOrigin());
+
+        String placeOfOrigin = sandwich.getPlaceOfOrigin();
+        List<String> alsoKnownAs = sandwich.getAlsoKnownAs();
+
+        if (placeOfOrigin.isEmpty()) {
+            mBinding.originTv.setVisibility(View.INVISIBLE);
+            mBinding.textView4.setVisibility(View.INVISIBLE);
+        } else {
+            mBinding.originTv.setText(placeOfOrigin);
+        }
+
+        if (alsoKnownAs.isEmpty()) {
+            mBinding.alsoKnownTv.setVisibility(View.INVISIBLE);
+            mBinding.textView.setVisibility(View.INVISIBLE);
+        } else {
+            mBinding.alsoKnownTv.setText(alsoKnownAs.toString().replaceAll("[\\[\\]]", ""));
+        }
     }
 }

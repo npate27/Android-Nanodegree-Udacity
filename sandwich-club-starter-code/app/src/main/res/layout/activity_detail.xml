@@ -23,12 +23,10 @@
             android:id="@+id/origin_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
-            tools:text="Country"
-            android:paddingRight="@dimen/tv_end_margin"/>
+            android:paddingRight="@dimen/tv_end_margin"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:text="Country" />
 
         <TextView
             android:id="@+id/textView"
@@ -40,7 +38,7 @@
             android:text="@string/detail_also_known_as_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_iv" />
+            app:layout_constraintTop_toBottomOf="@+id/origin_tv" />
 
         <TextView
             android:id="@+id/textView3"
@@ -70,34 +68,28 @@
             android:id="@+id/description_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:paddingRight="@dimen/tv_end_margin"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:text="Description text"
-            android:paddingRight="@dimen/tv_end_margin"/>
+            tools:text="Description text" />
 
         <TextView
             android:id="@+id/ingredients_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:paddingRight="@dimen/tv_end_margin"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:text="List of Ingredients"
-            android:paddingRight="@dimen/tv_end_margin"/>
+            tools:text="List of Ingredients" />
 
         <TextView
             android:id="@+id/also_known_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
-            tools:text="aka text"
-            android:paddingRight="@dimen/tv_end_margin"/>
+            android:paddingRight="@dimen/tv_end_margin"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:text="aka text" />
 
         <TextView
             android:id="@+id/textView2"
@@ -109,6 +101,6 @@
             android:text="@string/detail_description_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/image_iv" />
     </android.support.constraint.ConstraintLayout>
 </layout>

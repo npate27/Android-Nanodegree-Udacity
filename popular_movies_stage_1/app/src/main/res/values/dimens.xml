@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width_detail_poster">150dp</dimen>
+    <dimen name="height_detail_poster">200dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_top_detail_poster">24dp</dimen>
+    <dimen name="overview_text_size">18sp</dimen>
+    <dimen name="rating_text_size">24sp</dimen>
+    <dimen name="release_text_size">18sp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <dimen name="margin_top_line">8dp</dimen>
+    <dimen name="margin_start_rating">28dp</dimen>
+    <dimen name="margin_top_rating">48dp</dimen>
+    <dimen name="margin_start_release">28dp</dimen>
+    <dimen name="margin_top_release">92dp</dimen>
+</resources>

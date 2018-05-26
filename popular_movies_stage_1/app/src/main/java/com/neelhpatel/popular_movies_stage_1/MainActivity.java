@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.neelhpatel.popular_movies_stage_1.adapters.MovieInfoAdapter;
@@ -27,28 +26,23 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements  MovieInfoAdapter.MoviesOnClickHandler {
 
-    private static boolean isPopularSelected;
-    private static MovieInfoAdapter movieInfoAdapter;
+    private static boolean mIsPopularSelected;
+    private static MovieInfoAdapter mMovieInfoAdapter;
     private static final String SORT_KEY = "sort_key"; //Key for sort preference
     public static final String MOVIEINFO_KEY = "movieInfo_key"; //Key for passing object via intent
-    private static List<MovieInfo> mainMovieInfos = new ArrayList<>();
+    private static List<MovieInfo> mMainMovieInfos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        isPopularSelected = readSortPreference();
-        if(NetworkUtils.isConnectedToInternet(this)) {
-            RecyclerView recyclerView = findViewById(R.id.poster_images_rv);
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            fetchMoviePosters();
-            movieInfoAdapter = new MovieInfoAdapter(this, mainMovieInfos, this);
-            recyclerView.setAdapter(movieInfoAdapter);
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.toast_internet_string),
-                Toast.LENGTH_SHORT).show();
-        }
+        mIsPopularSelected = readSortPreference();
+        RecyclerView recyclerView = findViewById(R.id.poster_images_rv);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        fetchMoviePosters();
+        mMovieInfoAdapter = new MovieInfoAdapter(this, mMainMovieInfos, this);
+        recyclerView.setAdapter(mMovieInfoAdapter);
     }
 
     @Override
@@ -81,8 +75,13 @@ public class MainActivity extends AppCompatActivity implements  MovieInfoAdapter
      * on user's selected sort preference
      */
     private void fetchMoviePosters() {
-        URL mainMovieUrl = NetworkUtils.getMainUrl(isPopularSelected);
-        new MainMovieTask().execute(mainMovieUrl);
+        if(NetworkUtils.isConnectedToInternet(this)) {
+            URL mainMovieUrl = NetworkUtils.getMainUrl(mIsPopularSelected);
+            new MainMovieTask().execute(mainMovieUrl);
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.toast_internet_string),
+                Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements  MovieInfoAdapter
     private void writeSortPreference() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(SORT_KEY, isPopularSelected);
+        editor.putBoolean(SORT_KEY, mIsPopularSelected);
         editor.apply();
     }
 
@@ -111,19 +110,19 @@ public class MainActivity extends AppCompatActivity implements  MovieInfoAdapter
      * the new movie data is fetcehd and the dialog closes.
      */
     private void showSortDialog() {
-        int currentSelection = isPopularSelected ? 0 : 1;
+        int currentSelection = mIsPopularSelected ? 0 : 1;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        if(!isPopularSelected){
-                            isPopularSelected = true;
+                        if(!mIsPopularSelected){
+                            mIsPopularSelected = true;
                             break;
                         }
                     case 1:
-                        if(isPopularSelected){
-                            isPopularSelected = false;
+                        if(mIsPopularSelected){
+                            mIsPopularSelected = false;
                             break;
                         }
                     default:
@@ -163,8 +162,8 @@ public class MainActivity extends AppCompatActivity implements  MovieInfoAdapter
 
         @Override
         protected void onPostExecute(List<MovieInfo> movieInfos) {
-            mainMovieInfos = movieInfos;
-            movieInfoAdapter.changeData(mainMovieInfos);
+            mMainMovieInfos = movieInfos;
+            mMovieInfoAdapter.changeData(mMainMovieInfos);
             super.onPostExecute(movieInfos);
         }
     }

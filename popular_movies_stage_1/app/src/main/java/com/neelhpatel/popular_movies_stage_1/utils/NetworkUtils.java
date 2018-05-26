@@ -5,6 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
+import com.neelhpatel.popular_movies_stage_1.BuildConfig;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -22,11 +24,8 @@ public class NetworkUtils {
         "top_rated";
     private static final String API_KEY_STRING =
         "api_key";
-
-    //PUT KEY HERE
     private static final String API_KEY =
-        "";
-    
+        BuildConfig.MOVIE_DB_API_KEY;
     private static final String POSTER_BASE_URL =
         "http://image.tmdb.org/t/p";
     private static final String POSTER_SIZE =

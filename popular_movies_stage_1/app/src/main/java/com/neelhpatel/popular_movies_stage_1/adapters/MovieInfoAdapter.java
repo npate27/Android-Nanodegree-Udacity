@@ -20,12 +20,12 @@ import java.util.List;
 
 public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.ViewHolder> {
     private final Context mContext;
-    private final List<MovieInfo> movieInfos;
+    private final List<MovieInfo> mMovieInfos;
     private final MoviesOnClickHandler mClickHandler;
 
-    public MovieInfoAdapter(Context context, List<MovieInfo> movieInfos, MoviesOnClickHandler clickHandler) {
+    public MovieInfoAdapter(Context context, List<MovieInfo> mMovieInfos, MoviesOnClickHandler clickHandler) {
         mContext = context;
-        this.movieInfos = movieInfos;
+        this.mMovieInfos = mMovieInfos;
         mClickHandler = clickHandler;
     }
 
@@ -43,7 +43,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MovieInfo movieInfo = movieInfos.get(position);
+        MovieInfo movieInfo = mMovieInfos.get(position);
         URL posterImageUrl = NetworkUtils.getMoviePosterUrl(movieInfo.getPosterPath());
         Glide.with(mContext)
             .load(new GlideUrl(posterImageUrl))
@@ -55,7 +55,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.View
 
     @Override
     public int getItemCount() {
-        return movieInfos.size();
+        return mMovieInfos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -64,14 +64,14 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
             thumbnailView = itemView.findViewById(R.id.poster_image_iv);
-            thumbnailView.setContentDescription(movieInfos.get(getAdapterPosition()+1).getTitle());
+            thumbnailView.setContentDescription(mMovieInfos.get(getAdapterPosition()+1).getTitle());
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            mClickHandler.onClick(movieInfos.get(adapterPosition));
+            mClickHandler.onClick(mMovieInfos.get(adapterPosition));
         }
     }
 
@@ -83,8 +83,8 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.View
      * @param newMovies List of MovieInfo objects to be displayed by adapter
      */
     public void changeData(List<MovieInfo> newMovies) {
-        movieInfos.clear();
-        movieInfos.addAll(newMovies);
+        mMovieInfos.clear();
+        mMovieInfos.addAll(newMovies);
         notifyDataSetChanged();
 
     }

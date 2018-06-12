@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <!--Dialog Sort strings-->
+    <string name="pref_sort_label_popular">Popular</string>
+    <string name="pref_sort_label_top_rated">Top Rated</string>
+    <string name="dialog_sort_string">Choose Sort Order</string>
+    <string name="cancel">Cancel</string>
+    <string name="sort_order_menu_string">Sort</string>
+
+    <!--Formatting Strings-->
+    <string name="format_rating">Rating: %2.1f/10</string>
+    <string name="format_release_date">Released: %s</string>
+    <string name="default_poster_desc_string">Poster Image</string>
+
+    <!--MainActivity Toast-->
+    <string name="toast_internet_string">Not connected to the Internet!</string>
+    <string name="movie_detail_trailer_tv">Trailers</string>
+</resources>

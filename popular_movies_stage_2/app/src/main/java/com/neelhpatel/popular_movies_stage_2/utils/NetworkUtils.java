@@ -58,21 +58,6 @@ public class NetworkUtils {
         return generateUrl(mainMoviesQueryUri);
     }
 
-    /**
-     * Generates URL that will return more specific JSON pertaining to a specific movie
-     * via it's movie id field
-     *
-     * @param movieId movie to be queried further
-     * @return URL which will return more specific details of movie
-     */
-    public static URL getMovieDetailUrl(String movieId) {
-        Uri movieDetailUri = Uri.parse(MOVIES_BASE_URL).buildUpon()
-                .appendPath(movieId)
-                .appendQueryParameter(API_KEY_STRING, API_KEY)
-                .build();
-        return generateUrl(movieDetailUri);
-    }
-
 
     /**
      * Generates URL that will show the corresponding movie's poster at the specified

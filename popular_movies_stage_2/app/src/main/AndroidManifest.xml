@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.neelhpatel.popular_movies_stage_2">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor"
-        android:allowBackup="true">
+        android:allowBackup="true"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.neelhpatel.popular_movies_stage_2.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

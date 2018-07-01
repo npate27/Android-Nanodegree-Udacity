@@ -38,12 +38,12 @@ import java.util.List;
 public class MovieDetailActivity extends AppCompatActivity {
 
     ActivityMovieDetailBinding mMovieDetailBinding;
-    private static Button mFavoritesBtn;
-    private static TextView mNoReviewsTv;
-    private static TextView mNoTrailersTv;
-    private static RecyclerView mReviewRecyclerView;
-    private static RecyclerView mTrailerRecyclerView;
-    private static TrailerInfoAdapter mTrailerInfoAdapter;
+    private Button mFavoritesBtn;
+    private TextView mNoReviewsTv;
+    private TextView mNoTrailersTv;
+    private RecyclerView mReviewRecyclerView;
+    private RecyclerView mTrailerRecyclerView;
+    private TrailerInfoAdapter mTrailerInfoAdapter;
     private static ReviewInfoAdapter mReviewInfoAdapter;
     private static List<TrailerInfo> mTrailerInfos = new ArrayList<>();
     private static List<ReviewInfo> mReviewInfos = new ArrayList<>();
@@ -154,7 +154,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    static class MovieReviewTask extends AsyncTask<URL, Void, List<ReviewInfo>> {
+    class MovieReviewTask extends AsyncTask<URL, Void, List<ReviewInfo>> {
         @Override
         protected List<ReviewInfo> doInBackground(URL... urls) {
             if(android.os.Debug.isDebuggerConnected())
@@ -202,7 +202,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    static class MovieTrailerTask extends AsyncTask<URL, Void, List<TrailerInfo>> {
+    class MovieTrailerTask extends AsyncTask<URL, Void, List<TrailerInfo>> {
         @Override
         protected List<TrailerInfo> doInBackground(URL... urls) {
             if(android.os.Debug.isDebuggerConnected())

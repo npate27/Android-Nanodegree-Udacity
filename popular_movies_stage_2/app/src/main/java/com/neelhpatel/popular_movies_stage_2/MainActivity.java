@@ -1,6 +1,5 @@
 package com.neelhpatel.popular_movies_stage_2;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
@@ -30,6 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.MoviesOnClickHandler {
 
     private static int currentSortPreference;
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
     /**
      * Opens an AlertDialog that features two options (Popular or Top-Rated) in a single-choice
      * option list. Upon choosing a sort order, the choice is written as a preference,
-     * the new movie data is fetcehd and the dialog closes.
+     * the new movie data is fetched and the dialog closes.
      */
     private void showSortDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

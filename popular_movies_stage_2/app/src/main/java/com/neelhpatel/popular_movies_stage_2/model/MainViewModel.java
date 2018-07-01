@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
-    private LiveData<List<MovieInfo>> favorites;
+    private final LiveData<List<MovieInfo>> favorites;
 
     public MainViewModel(@NonNull Application application) {
         super(application);

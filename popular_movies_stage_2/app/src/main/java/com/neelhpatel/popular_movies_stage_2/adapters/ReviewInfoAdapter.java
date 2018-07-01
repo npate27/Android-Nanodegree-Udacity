@@ -1,5 +1,8 @@
 package com.neelhpatel.popular_movies_stage_2.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,13 +17,11 @@ import java.util.List;
 
 public class ReviewInfoAdapter extends RecyclerView.Adapter<ReviewInfoAdapter.ViewHolder> {
     private final List<ReviewInfo> mReviewInfos;
+    private final Context mContext;
 
-    public ReviewInfoAdapter(List<ReviewInfo> reviewInfos) {
+    public ReviewInfoAdapter(List<ReviewInfo> reviewInfos, Context context) {
         mReviewInfos = reviewInfos;
-    }
-
-    public interface ReviewsOnClickHandler {
-        void onClick(ReviewInfo reviewInfo);
+        mContext = context;
     }
 
     @NonNull
@@ -57,6 +58,9 @@ public class ReviewInfoAdapter extends RecyclerView.Adapter<ReviewInfoAdapter.Vi
         @Override
         public void onClick(View v) {
             ReviewInfo reviewInfo = mReviewInfos.get(getAdapterPosition());
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(reviewInfo.getUrl()));
+            mContext.startActivity(intent);
         }
     }
 

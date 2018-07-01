@@ -38,12 +38,12 @@ import java.util.List;
 public class MovieDetailActivity extends AppCompatActivity {
 
     ActivityMovieDetailBinding mMovieDetailBinding;
-    private Button mFavoritesBtn;
-    private TextView mNoReviewsTv;
-    private TextView mNoTrailersTv;
-    private RecyclerView mReviewRecyclerView;
-    private RecyclerView mTrailerRecyclerView;
-    private TrailerInfoAdapter mTrailerInfoAdapter;
+    private static Button mFavoritesBtn;
+    private static TextView mNoReviewsTv;
+    private static TextView mNoTrailersTv;
+    private static RecyclerView mReviewRecyclerView;
+    private static RecyclerView mTrailerRecyclerView;
+    private static TrailerInfoAdapter mTrailerInfoAdapter;
     private static ReviewInfoAdapter mReviewInfoAdapter;
     private static List<TrailerInfo> mTrailerInfos = new ArrayList<>();
     private static List<ReviewInfo> mReviewInfos = new ArrayList<>();
@@ -88,7 +88,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             mReviewRecyclerView = findViewById(R.id.movie_reviews_rv);
             mReviewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             fetchReviews(movieInfo.getId());
-            mReviewInfoAdapter = new ReviewInfoAdapter(mReviewInfos);
+            mReviewInfoAdapter = new ReviewInfoAdapter(mReviewInfos, this);
             mReviewRecyclerView.setAdapter(mReviewInfoAdapter);
         } else {
             finish();
@@ -154,7 +154,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    class MovieReviewTask extends AsyncTask<URL, Void, List<ReviewInfo>> {
+    static class MovieReviewTask extends AsyncTask<URL, Void, List<ReviewInfo>> {
         @Override
         protected List<ReviewInfo> doInBackground(URL... urls) {
             if(android.os.Debug.isDebuggerConnected())
@@ -202,7 +202,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    class MovieTrailerTask extends AsyncTask<URL, Void, List<TrailerInfo>> {
+    static class MovieTrailerTask extends AsyncTask<URL, Void, List<TrailerInfo>> {
         @Override
         protected List<TrailerInfo> doInBackground(URL... urls) {
             if(android.os.Debug.isDebuggerConnected())
@@ -217,7 +217,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return trailerInfos;
         }
 

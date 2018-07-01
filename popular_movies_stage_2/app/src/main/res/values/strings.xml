@@ -4,6 +4,7 @@
     <!--Dialog Sort strings-->
     <string name="pref_sort_label_popular">Popular</string>
     <string name="pref_sort_label_top_rated">Top Rated</string>
+    <string name="pref_sort_label_favorites">Favorites</string>
     <string name="dialog_sort_string">Choose Sort Order</string>
     <string name="cancel">Cancel</string>
     <string name="sort_order_menu_string">Sort</string>
@@ -15,5 +16,12 @@
 
     <!--MainActivity Toast-->
     <string name="toast_internet_string">Not connected to the Internet!</string>
+
+    <!--MovieDetailActivity Strings-->
     <string name="movie_detail_trailer_tv">Trailers</string>
+    <string name="movie_detail_review_tv">Reviews</string>
+    <string name="no_trailers_tv">No Trailers Available.</string>
+    <string name="no_reviews_tv">No Reviews Available</string>
+    <string name="add_favorites_tv">Add to Favorites</string>
+    <string name="remove_favorites_tv">Remove from Favorites</string>
 </resources>

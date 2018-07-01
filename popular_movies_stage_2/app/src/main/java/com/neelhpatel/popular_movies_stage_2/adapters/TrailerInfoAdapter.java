@@ -1,6 +1,8 @@
 package com.neelhpatel.popular_movies_stage_2.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,19 +16,12 @@ import com.neelhpatel.popular_movies_stage_2.model.TrailerInfo;
 import java.util.List;
 
 public class TrailerInfoAdapter extends RecyclerView.Adapter<TrailerInfoAdapter.ViewHolder> {
-    private final Context mContext;
     private final List<TrailerInfo> mTrailerInfos;
-    private final TrailersOnClickHandler mClickHandler;
+    private final Context mContext;
 
-
-    public TrailerInfoAdapter(Context context, List<TrailerInfo> trailerInfos, TrailersOnClickHandler clickHandler) {
-        mContext = context;
+    public TrailerInfoAdapter(List<TrailerInfo> trailerInfos, Context context) {
         mTrailerInfos = trailerInfos;
-        mClickHandler = clickHandler;
-    }
-
-    public interface TrailersOnClickHandler {
-        void onClick(TrailerInfo trailerInfo);
+        mContext = context;
     }
 
     @NonNull
@@ -48,19 +43,32 @@ public class TrailerInfoAdapter extends RecyclerView.Adapter<TrailerInfoAdapter.
         return mTrailerInfos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         public final TextView trailerTitleView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             trailerTitleView = itemView.findViewById(R.id.trailer_title_tv);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
-            mClickHandler.onClick(mTrailerInfos.get(adapterPosition));
+            String videoKey = mTrailerInfos.get(getAdapterPosition()).getKey();
+            Uri uri = Uri.parse("http://www.youtube.com/watch?v=".concat(videoKey));
+            mContext.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            String videoKey = "http://www.youtube.com/watch?v=".concat(mTrailerInfos.get(getAdapterPosition()).getKey());
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, videoKey);
+            sendIntent.setType("text/plain");
+            mContext.startActivity(sendIntent);
+            return true;
         }
     }
 

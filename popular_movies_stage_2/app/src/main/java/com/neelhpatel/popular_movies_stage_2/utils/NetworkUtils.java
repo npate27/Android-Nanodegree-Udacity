@@ -39,12 +39,12 @@ public class NetworkUtils {
      * Generates URL that will return a JSONArray with all main data required for basic layout
      * of MainActivity and  MovieDetailActivity
      *
-     * @param isPopularSelected current sort preference
+     * @param currentPreference current sort preference
      * @return URL which will return JSONArray of sorted movies
      */
-    public static URL getMainUrl (boolean isPopularSelected) {
+    public static URL getMainUrl (int currentPreference) {
         Uri mainMoviesQueryUri = Uri.parse(MOVIES_BASE_URL);
-        if (isPopularSelected) {
+        if (currentPreference == 0) {
             mainMoviesQueryUri = mainMoviesQueryUri.buildUpon()
                 .appendPath(MOVIES_POPULAR)
                 .appendQueryParameter(API_KEY_STRING, API_KEY)
@@ -114,9 +114,9 @@ public class NetworkUtils {
      * @param movieId movie to be queried further
      * @return URL which will return reviews of movie
      */
-    public static URL getMovieReviews(String movieId) {
+    public static URL getMovieReviews(int movieId) {
         Uri movieDetailUri = Uri.parse(MOVIES_BASE_URL).buildUpon()
-            .appendPath(movieId)
+            .appendPath(Integer.toString(movieId))
             .appendPath(MOVIE_REVIEWS)
             .appendQueryParameter(API_KEY_STRING, API_KEY)
             .build();

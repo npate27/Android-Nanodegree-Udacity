@@ -1,5 +1,8 @@
 package com.neelhpatel.popular_movies_stage_2.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,7 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@Entity(tableName = "favorites")
 public class MovieInfo implements Parcelable {
+
+    @PrimaryKey(autoGenerate = true)
     final int id;
     final String posterPath;
     final String title;
@@ -26,6 +32,7 @@ public class MovieInfo implements Parcelable {
         this.overview = overview;
     }
 
+    @Ignore
     protected MovieInfo(Parcel in) {
         id = in.readInt();
         posterPath = in.readString();

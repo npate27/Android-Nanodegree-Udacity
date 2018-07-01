@@ -1,10 +1,14 @@
 package com.neelhpatel.popular_movies_stage_2;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +20,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.neelhpatel.popular_movies_stage_2.adapters.MovieInfoAdapter;
+import com.neelhpatel.popular_movies_stage_2.model.AppDatabase;
+import com.neelhpatel.popular_movies_stage_2.model.MainViewModel;
 import com.neelhpatel.popular_movies_stage_2.model.MovieInfo;
 import com.neelhpatel.popular_movies_stage_2.utils.MovieDBJsonUtils;
 import com.neelhpatel.popular_movies_stage_2.utils.NetworkUtils;
@@ -26,18 +32,21 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.MoviesOnClickHandler {
 
-    private static boolean mIsPopularSelected;
+    private static int currentSortPreference;
     private static MovieInfoAdapter mMovieInfoAdapter;
     private static final String SORT_KEY = "sort_key"; //Key for sort preference
     public static final String MOVIEINFO_KEY = "movieInfo_key"; //Key for passing object via intent
     private static List<MovieInfo> mMainMovieInfos = new ArrayList<>();
+
+    private AppDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mIsPopularSelected = readSortPreference();
+        mDb = AppDatabase.getsInstance(getApplicationContext());
+        currentSortPreference = readSortPreference();
         RecyclerView recyclerView = findViewById(R.id.poster_images_rv);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         fetchMoviePosters();
@@ -75,12 +84,25 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
      * on user's selected sort preference
      */
     private void fetchMoviePosters() {
-        if(NetworkUtils.isConnectedToInternet(this)) {
-            URL mainMovieUrl = NetworkUtils.getMainUrl(mIsPopularSelected);
-            new MainMovieTask().execute(mainMovieUrl);
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.toast_internet_string),
-                Toast.LENGTH_SHORT).show();
+        if(currentSortPreference != 2) {
+            if (NetworkUtils.isConnectedToInternet(this)) {
+                URL mainMovieUrl = NetworkUtils.getMainUrl(currentSortPreference);
+                new MainMovieTask().execute(mainMovieUrl);
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.toast_internet_string),
+                    Toast.LENGTH_SHORT).show();
+                currentSortPreference = 2;
+            }
+        }
+        else {
+            MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+            viewModel.getFavorites().observe(this, new Observer<List<MovieInfo>>() {
+                 @Override
+                 public void onChanged(@Nullable List<MovieInfo> movieInfos) {
+                     mMainMovieInfos = movieInfos;
+                     mMovieInfoAdapter.changeData(mMainMovieInfos);
+                 }
+             });
         }
     }
 
@@ -89,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
      *
      * @return user's preferred sort order or the default order
      */
-    private boolean readSortPreference() {
+    private int readSortPreference() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        return sp.getBoolean(SORT_KEY, false);
+        return sp.getInt(SORT_KEY, 0);
     }
 
     /**
@@ -100,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
     private void writeSortPreference() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(SORT_KEY, mIsPopularSelected);
+        editor.putInt(SORT_KEY, currentSortPreference);
         editor.apply();
     }
 
@@ -110,24 +132,10 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
      * the new movie data is fetcehd and the dialog closes.
      */
     private void showSortDialog() {
-        int currentSelection = mIsPopularSelected ? 0 : 1;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        if(!mIsPopularSelected){
-                            mIsPopularSelected = true;
-                            break;
-                        }
-                    case 1:
-                        if(mIsPopularSelected){
-                            mIsPopularSelected = false;
-                            break;
-                        }
-                    default:
-                        dialog.cancel();
-                }
+                currentSortPreference = which;
                 fetchMoviePosters();
                 dialog.dismiss();
                 writeSortPreference();
@@ -137,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
         builder.setTitle(R.string.dialog_sort_string)
             .setCancelable(true)
             .setNegativeButton(R.string.cancel, dialogListener)
-            .setSingleChoiceItems(R.array.sort_options_array, currentSelection, dialogListener);
+            .setSingleChoiceItems(R.array.sort_options_array, currentSortPreference, dialogListener);
         builder.show();
     }
 

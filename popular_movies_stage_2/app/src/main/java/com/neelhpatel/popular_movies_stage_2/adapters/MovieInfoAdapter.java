@@ -16,11 +16,12 @@ import com.neelhpatel.popular_movies_stage_2.R;
 import com.neelhpatel.popular_movies_stage_2.utils.NetworkUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.ViewHolder> {
     private final Context mContext;
-    private final List<MovieInfo> mMovieInfos;
+    private List<MovieInfo> mMovieInfos;
     private final MoviesOnClickHandler mClickHandler;
 
     public MovieInfoAdapter(Context context, List<MovieInfo> movieInfos, MoviesOnClickHandler clickHandler) {
@@ -83,7 +84,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<MovieInfoAdapter.View
      * @param newMovies List of MovieInfo objects to be displayed by adapter
      */
     public void changeData(List<MovieInfo> newMovies) {
-        mMovieInfos.clear();
+        mMovieInfos = new ArrayList<>();
         mMovieInfos.addAll(newMovies);
         notifyDataSetChanged();
 

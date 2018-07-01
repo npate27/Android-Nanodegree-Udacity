@@ -1,4 +1,4 @@
-package com.neelhpatel.popular_movies_stage_2.model;
+package com.neelhpatel.popular_movies_stage_2.database;
 /*
  * Copyright (C) 2017 The Android Open Source Project
  *

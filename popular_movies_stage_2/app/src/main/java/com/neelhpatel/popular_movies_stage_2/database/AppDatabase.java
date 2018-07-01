@@ -1,10 +1,12 @@
-package com.neelhpatel.popular_movies_stage_2.model;
+package com.neelhpatel.popular_movies_stage_2.database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
+
+import com.neelhpatel.popular_movies_stage_2.model.MovieInfo;
 
 @Database(entities = {MovieInfo.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
@@ -18,7 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (LOCK) {
                 Log.d(LOG_TAG, "Creating new db instance");
                 sInstance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, AppDatabase.DATABASE_NAME)
+                    AppDatabase.class, DATABASE_NAME)
                     .build();
             }
         }

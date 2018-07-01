@@ -6,8 +6,34 @@
     <dimen name="margin_top_detail_poster">24dp</dimen>
     <dimen name="overview_text_size">18sp</dimen>
     <dimen name="rating_text_size">24sp</dimen>
+    <dimen name="margin_top_rating">24sp</dimen>
     <dimen name="release_text_size">18sp</dimen>
     <dimen name="line_height">1dp</dimen>
     <dimen name="margin_top_line">8dp</dimen>
     <dimen name="margin_top_release">92dp</dimen>
+    <dimen name="margin_end_release">16dp</dimen>
+    <dimen name="margin_start_release">8dp</dimen>
+    <dimen name="margin_top_favorites_btn">16dp</dimen>
+    <dimen name="margin_start_trailer">16dp</dimen>
+    <dimen name="margin_top_trailer">8dp</dimen>
+    <dimen name="width_empty_trailer">157dp</dimen>
+    <dimen name="height_empty_trailer">35dp</dimen>
+    <dimen name="margin_start_reviews">16dp</dimen>
+    <dimen name="margin_top_reviews">8dp</dimen>
+    <dimen name="margin_end_review_view">16dp</dimen>
+    <dimen name="margin_start_review_view">16dp</dimen>
+    <dimen name="margin_top_review_view">8dp</dimen>
+    <dimen name="height_author">18dp</dimen>
+    <dimen name="margin_start_author">16dp</dimen>
+    <dimen name="margin_top_author">8dp</dimen>
+    <dimen name="margin_bottom_content">8dp</dimen>
+    <dimen name="margin_end_content">16dp</dimen>
+    <dimen name="margin_start_content">16dp</dimen>
+    <dimen name="height_trailer_title">18dp</dimen>
+    <dimen name="margin_end_trailer_height">8dp</dimen>
+    <dimen name="margin_start_trailer_title">24dp</dimen>
+    <dimen name="margin_bottom_play">8dp</dimen>
+    <dimen name="margin_start_play">16dp</dimen>
+    <dimen name="margin_top_play">8dp</dimen>
+
 </resources>

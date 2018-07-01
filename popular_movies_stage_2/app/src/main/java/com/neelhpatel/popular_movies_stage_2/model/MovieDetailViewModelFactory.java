@@ -4,6 +4,8 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
+import com.neelhpatel.popular_movies_stage_2.database.AppDatabase;
+
 @SuppressWarnings("ALL")
 public class MovieDetailViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 

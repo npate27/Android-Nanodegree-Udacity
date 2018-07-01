@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.neelhpatel.popular_movies_stage_2.adapters.MovieInfoAdapter;
-import com.neelhpatel.popular_movies_stage_2.model.AppDatabase;
+import com.neelhpatel.popular_movies_stage_2.database.AppDatabase;
 import com.neelhpatel.popular_movies_stage_2.model.MainViewModel;
 import com.neelhpatel.popular_movies_stage_2.model.MovieInfo;
 import com.neelhpatel.popular_movies_stage_2.utils.MovieDBJsonUtils;

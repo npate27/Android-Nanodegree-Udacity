@@ -70,7 +70,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                 public void onChanged(@Nullable MovieInfo currentInfo) {
                     setIsFavorite(currentInfo != null);
                     setButtonText();
-                    viewModel.getFavorite().removeObserver(this);
                 }
             });
 
@@ -94,6 +93,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             finish();
         }
     }
+
 
     public void setIsFavorite(boolean state) {
         isFavorite = state;
@@ -126,6 +126,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         setTitle(movieInfo.getTitle());
     }
 
+    /**
+     *  Updates isFavorite, button text and then performs an insertion or
+     *  deletion depending on the current isFavorite state.
+     * @param view Favorites button view
+     */
     public void modifyFavorites(View view) {
         setIsFavorite(!isFavorite);
         setButtonText();

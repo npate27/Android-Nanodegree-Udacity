@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MovieInfoAdapter.
 
     /**
      * Starts AsyncTask which will fetch movie data in the background depending
-     * on user's selected sort preference
+     * on user's selected sort preference. If no internet, it defaults to favorites
      */
     private void fetchMoviePosters() {
         if(currentSortPreference != 2) {

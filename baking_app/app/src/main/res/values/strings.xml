@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="ingredients_tv">Ingredients List</string>
+    <string name="servings_string">%d Servings</string>
+    <string name="ingredients_string">%.1f %s</string>
+</resources>

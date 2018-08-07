@@ -6,17 +6,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/exoplayer_view_height"
+        android:visibility="gone"
+        app:controller_layout_id="@layout/custom_playback_control"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:use_controller="true" />
+
     <TextView
         android:id="@+id/step_instruction_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="@dimen/step_instruction_tv_height"
+        android:layout_marginEnd="@dimen/step_instruction_tv_margin"
+        android:layout_marginStart="@dimen/step_instruction_tv_margin"
+        android:layout_marginTop="@dimen/step_instruction_tv_margin"
+        android:textSize="@dimen/step_instruction_tv_text_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerView"
         tools:text="Do the cooking stuff" />
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/next_btn_margin_bottom"
+        android:layout_marginEnd="@dimen/next_btn_margin_end"
+        android:text="@string/next_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/previous_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/prev_button_margin_bottom"
+        android:layout_marginStart="@dimen/prev_button_margin_start"
+        android:text="@string/previous_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

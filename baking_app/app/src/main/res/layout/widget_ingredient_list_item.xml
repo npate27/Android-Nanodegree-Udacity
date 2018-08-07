@@ -10,19 +10,21 @@
         android:id="@+id/ingredient_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/ingredient_name_tv_margin_end"
-        android:layout_marginStart="@dimen/ingredient_name_tv_margin_start"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@id/quantity_tv"
+        android:textColor="@android:color/white"
         tools:text="Apples" />
 
     <TextView
         android:id="@+id/quantity_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/quantity_tv_margin_end"
+        android:layout_marginEnd="16dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:textColor="@android:color/white"
         tools:text="30 G" />
 
 </RelativeLayout>

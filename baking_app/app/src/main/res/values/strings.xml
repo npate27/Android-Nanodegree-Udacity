@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">BakingApp</string>
-    <string name="ingredients_tv">Ingredients List</string>
-    <string name="servings_string">%d Servings</string>
-    <string name="ingredients_string">%.1f %s</string>
+    <string name="ingredients_tv">Ingredients List:</string>
+    <string name="servings_string">Serves %d</string>
+    <string name="ingredient_amount_string">%.1f %s</string>
+    <string name="ingredients_name_string">\u2022 %s</string>
+    <string name="previous_button_string">Previous</string>
+    <string name="next_button_string">Next</string>
+    <string name="toast_internet_string">Not connected to the Internet!</string>
+    <string name="add_to_widget">Add to Widget</string>
+    <string name="recipe_iv_content_description">recipe_image</string>
+    <string name="indicator_iv_content_description">Arrow/Play button</string>
+    <string name="exoplayer_play_content_description">Playback play</string>
+    <string name="exoplayer_pause_content_description">Playback pause</string>
 </resources>

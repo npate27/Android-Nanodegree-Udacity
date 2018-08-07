@@ -13,6 +13,8 @@ import com.neelhpatel.bakingapp.model.IngredientInfo;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
 
     private final Context mContext;
@@ -34,9 +36,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public void onBindViewHolder(@NonNull IngredientsAdapter.ViewHolder viewHolder, int i) {
         IngredientInfo ingredientInfo = mIngredientInfos.get(i);
-        viewHolder.ingredientNameTv.setText(ingredientInfo.getIngredient());
+        viewHolder.ingredientNameTv.setText(mContext.getResources()
+                .getString(R.string.ingredients_name_string, ingredientInfo.getIngredient()));
         viewHolder.quantityTv.setText(mContext.getResources()
-                .getString(R.string.ingredients_string, ingredientInfo.getQuantity(), ingredientInfo.getMeasure()));
+                .getString(R.string.ingredient_amount_string, ingredientInfo.getQuantity(), ingredientInfo.getMeasure()));
     }
 
     @Override
@@ -45,8 +48,8 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView ingredientNameTv;
-        public TextView quantityTv;
+        @BindView(R.id.ingredient_name_tv) public TextView ingredientNameTv;
+        @BindView(R.id.quantity_tv) public TextView quantityTv;
 
         public ViewHolder(View itemView) {
             super(itemView);

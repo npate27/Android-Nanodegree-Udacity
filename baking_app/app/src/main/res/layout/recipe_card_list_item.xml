@@ -1,41 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/recipe_card_item_layout"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/card_view_margin"
+        android:layout_marginStart="@dimen/card_view_margin"
+        android:layout_marginTop="@dimen/card_view_margin"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/recipe_iv"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/recipe_card_item_layout"
             android:layout_width="match_parent"
-            android:layout_height="127dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/recipe_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recipe_iv"
-            tools:text="Nutella Pie" />
+            <ImageView
+                android:id="@+id/recipe_iv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/recipe_iv_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/recipe_iv_content_description" />
 
-        <TextView
-            android:id="@+id/recipe_servings_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recipe_iv"
-            tools:text="3 servings" />
-    </android.support.constraint.ConstraintLayout>
-</android.support.v7.widget.CardView>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_constraint_layout_height"
+                android:background="@color/blackAlpha"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/recipe_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/recipe_name_tv_height"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/recipe_name_tv_margin_start"
+                    android:layout_marginTop="@dimen/recipe_name_tv_margin_top"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/recipe_name_tv_text_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Nutella Pie" />
+
+                <TextView
+                    android:id="@+id/recipe_servings_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/recipe_servings_tv_height"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/recipe_servings_tv_margin_start"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/recipe_servings_tv_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recipe_name_tv"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="3 servings" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

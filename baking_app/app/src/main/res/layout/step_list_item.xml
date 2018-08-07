@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/greyAlpha">
 
     <TextView
         android:id="@+id/step_item_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/step_item_tv_margin_bottom"
+        android:layout_marginEnd="@dimen/step_item_tv_margin_end"
+        android:layout_marginStart="@dimen/step_item_tv_margin_start"
+        android:layout_marginTop="@dimen/step_item_tv_margin_top"
+        android:textSize="@dimen/step_item_tv_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/indicator_iv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="test" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/indicator_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/indicator_iv_margin_bottom"
+        android:layout_marginEnd="@dimen/indicator_iv_margin_end"
+        android:layout_marginTop="@dimen/indicator_iv_margin_top"
+        app:layout_constraintBottom_toBottomOf="@+id/step_item_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/step_item_tv"
+        app:srcCompat="@drawable/ic_arrow_forward_black_24dp"
+        android:contentDescription="@string/indicator_iv_content_description" />
+
+</android.support.constraint.ConstraintLayout>

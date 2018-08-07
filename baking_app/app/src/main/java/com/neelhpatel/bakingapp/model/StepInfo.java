@@ -4,11 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class StepInfo implements Parcelable {
-   int id;
-   String shortDescription;
-   String description;
-   String videoURL;
-   String thumbnailURL;
+   private int id;
+   private String shortDescription;
+   private String description;
+   private String videoURL;
+   private String thumbnailURL;
 
     public StepInfo(int id, String shortDescription, String description, String videoURL, String thumbnailURL) {
         this.id = id;
@@ -16,10 +16,6 @@ public class StepInfo implements Parcelable {
         this.description = description;
         this.videoURL = videoURL;
         this.thumbnailURL = thumbnailURL;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getShortDescription() {
@@ -52,7 +48,7 @@ public class StepInfo implements Parcelable {
         dest.writeString(this.thumbnailURL);
     }
 
-    protected StepInfo(Parcel in) {
+    private StepInfo(Parcel in) {
         this.id = in.readInt();
         this.shortDescription = in.readString();
         this.description = in.readString();

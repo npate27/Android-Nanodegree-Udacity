@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
     <FrameLayout
         android:id="@+id/step_fragment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_width="@dimen/step_fragment_container_width"
+        android:layout_height="match_parent">
+    </FrameLayout>
 
     <View
-        android:layout_width="1dp"
+        android:layout_width="@dimen/tablet_divider_view_width"
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray" />
 
@@ -22,16 +24,18 @@
         android:layout_gravity="center_vertical"
         android:background="@android:color/white"
         android:orientation="vertical"
-        android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp">
+        android:paddingBottom="@dimen/step_container_container_padding"
+        android:paddingStart="@dimen/step_container_container_padding"
+        android:paddingEnd="@dimen/step_container_container_padding"
+        android:paddingTop="@dimen/step_container_container_padding"
+        tools:ignore="InconsistentLayout">
 
         <FrameLayout
             android:id="@+id/step_content_container"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            tools:ignore="InconsistentLayout" />
 
     </LinearLayout>
 

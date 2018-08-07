@@ -11,15 +11,16 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
 import com.neelhpatel.bakingapp.R;
 import com.neelhpatel.bakingapp.model.RecipeInfo;
-import com.neelhpatel.bakingapp.utils.NetworkUtils;
+import com.neelhpatel.bakingapp.utils.DrawableInfo;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder>{
 
@@ -48,12 +49,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder viewHolder, int i) {
         RecipeInfo recipeInfo = mRecipeInfos.get(i);
-        //TODO FIX THIS
+        int drawableId = DrawableInfo.getRecipeDrawableId(recipeInfo.getName());
         Glide.with(mContext)
-                .load(R.drawable.loading_circle)
+                .load(recipeInfo.getImage())
                 .apply(new RequestOptions()
-                        .placeholder(R.drawable.loading_circle)
-                        .error(R.drawable.stock_image_not_available))
+                        .placeholder(drawableId)
+                        .centerCrop())
                 .into(viewHolder.recipeView);
 
         viewHolder.recipeTitle.setText(recipeInfo.getName());
@@ -67,12 +68,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final ImageView recipeView;
-        public final TextView recipeTitle;
-        public final TextView recipeServings;
+        @BindView(R.id.recipe_iv) public ImageView recipeView;
+        @BindView(R.id.recipe_name_tv) public TextView recipeTitle;
+        @BindView(R.id.recipe_servings_tv) public TextView recipeServings;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
             recipeView = itemView.findViewById(R.id.recipe_iv);
             recipeTitle = itemView.findViewById(R.id.recipe_name_tv);
             recipeServings = itemView.findViewById(R.id.recipe_servings_tv);

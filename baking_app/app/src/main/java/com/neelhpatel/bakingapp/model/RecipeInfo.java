@@ -6,12 +6,12 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class RecipeInfo implements Parcelable {
-   int id;
-   String name;
-   ArrayList<IngredientInfo> ingredients;
-   ArrayList<StepInfo> steps;
-   int servings;
-   String image;
+   private int id;
+   private String name;
+   private ArrayList<IngredientInfo> ingredients;
+   private ArrayList<StepInfo> steps;
+   private int servings;
+   private String image;
 
     public RecipeInfo(int id, String name, ArrayList<IngredientInfo> ingredients, ArrayList<StepInfo> steps, int servings, String image) {
         this.id = id;
@@ -20,10 +20,6 @@ public class RecipeInfo implements Parcelable {
         this.steps = steps;
         this.servings = servings;
         this.image = image;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
@@ -44,10 +40,6 @@ public class RecipeInfo implements Parcelable {
 
     public String getImage() {
         return image;
-    }
-
-    public void appendSteps(StepInfo stepInfo) {
-        steps.add(0, stepInfo);
     }
 
     @Override

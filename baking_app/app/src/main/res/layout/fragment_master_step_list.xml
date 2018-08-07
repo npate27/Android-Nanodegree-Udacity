@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/steps_rv"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ingredients_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/ingredients_tv"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/ingredient_tv_height"
+                android:layout_marginStart="@dimen/ingredient_tv_margin"
+                android:layout_marginTop="@dimen/ingredient_tv_margin"
+                android:text="@string/ingredients_tv"
+                app:layout_constraintStart_toStartOf="@+id/ingredients_container"
+                app:layout_constraintTop_toTopOf="@+id/ingredients_container" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ingredients_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ingredient_rv_margin_top"
+                app:layout_constraintEnd_toEndOf="@+id/ingredients_container"
+                app:layout_constraintStart_toStartOf="@+id/ingredients_container"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients_tv" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/steps_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/steps_rv_margin_top"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingredients_container" />
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

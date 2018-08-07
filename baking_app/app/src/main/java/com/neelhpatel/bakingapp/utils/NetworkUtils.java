@@ -31,7 +31,6 @@ public class NetworkUtils {
         }
     }
 
-    //TODO FIX THIS WITH LIBRARY
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

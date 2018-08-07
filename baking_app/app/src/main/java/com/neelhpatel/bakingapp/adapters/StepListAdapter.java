@@ -1,6 +1,5 @@
 package com.neelhpatel.bakingapp.adapters;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ViewHo
     }
 
     public interface StepsClickHandler {
-        void onClick(StepInfo stepInfo);
+        void onClick(StepInfo stepInfo, int adapterPosition);
     }
 
     @NonNull
@@ -58,7 +57,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ViewHo
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            mStepsClickHandler.onClick(mStepInfos.get(adapterPosition));
+            mStepsClickHandler.onClick(mStepInfos.get(adapterPosition), adapterPosition);
         }
     }
 }

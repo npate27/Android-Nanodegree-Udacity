@@ -1,6 +1,8 @@
 package com.neelhpatel.bakingapp.fragments;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -77,6 +79,7 @@ public class StepsFragment extends Fragment implements StepListAdapter.StepsClic
         return rootView;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -101,6 +104,7 @@ public class StepsFragment extends Fragment implements StepListAdapter.StepsClic
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(StepInfo stepInfo, int adapterPosition) {
         mCallback.onStepSelected(stepInfo);
@@ -125,6 +129,7 @@ public class StepsFragment extends Fragment implements StepListAdapter.StepsClic
         outState.putParcelableArrayList(INGREDIENTS_KEY, mIngredientInfos);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void changeViewAttributes(View view, int backgroundColor, int iconDrawableId) {
         Context context = getContext();
         view.setBackgroundColor(ContextCompat.getColor(Objects.requireNonNull(context), backgroundColor));

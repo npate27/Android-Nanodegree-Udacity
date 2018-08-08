@@ -2,17 +2,25 @@ package com.neelhpatel.bakingapp.fragments;
 
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.github.rubensousa.previewseekbar.PreviewLoader;
+import com.github.rubensousa.previewseekbar.exoplayer.PreviewTimeBar;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -26,6 +34,8 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+import com.neelhpatel.bakingapp.GlideThumbnailTransformation;
 import com.neelhpatel.bakingapp.R;
 import com.neelhpatel.bakingapp.model.StepInfo;
 
@@ -37,13 +47,15 @@ import butterknife.ButterKnife;
 
 import static android.view.View.GONE;
 
-public class StepFragment extends Fragment implements View.OnClickListener {
+public class StepFragment extends Fragment implements View.OnClickListener, PreviewLoader{
     private static final String STEP_KEY = "step_key";
     private static final String STEPS_KEY = "steps_key";
     private static final String TWOPANE_KEY = "twopane_key";
     private static final String PLAYBACK_POS_KEY = "playback_pos_key";
+    private static final String PLAY_WHEN_READY_KEY = "play_when_ready_key";
 
     private boolean mTwoPane;
+    private boolean mIsPlayWhenReady;
     private long mPlayBackPosition;
     private StepInfo mStepInfo;
     private SimpleExoPlayer mExoPlayer;
@@ -53,6 +65,8 @@ public class StepFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.previous_btn) Button mPreviousBtn;
     @BindView(R.id.playerView) PlayerView mPlayerView;
     @BindView(R.id.step_instruction_tv) TextView mInstructionStep;
+    @BindView(R.id.exo_progress) PreviewTimeBar previewTimeBar;
+    @BindView(R.id.imageView) ImageView mPreviewIv;
 
     public StepFragment() {}
 
@@ -75,6 +89,7 @@ public class StepFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,11 +100,13 @@ public class StepFragment extends Fragment implements View.OnClickListener {
             mStepInfo = savedInstanceState.getParcelable(STEP_KEY);
             mStepsInfos = savedInstanceState.getParcelableArrayList(STEPS_KEY);
             mPlayBackPosition = savedInstanceState.getLong(PLAYBACK_POS_KEY);
+            mIsPlayWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY_KEY);
         } else {
             mTwoPane = Objects.requireNonNull(getArguments()).getBoolean(TWOPANE_KEY);
             mStepInfo = getArguments().getParcelable(STEP_KEY);
             mStepsInfos = getArguments().getParcelableArrayList(STEPS_KEY);
             mPlayBackPosition = 0;
+            mIsPlayWhenReady = true;
         }
 
         mInstructionStep.setText(mStepInfo.getDescription());
@@ -115,9 +132,10 @@ public class StepFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(TWOPANE_KEY, mTwoPane);
+        outState.putBoolean(PLAY_WHEN_READY_KEY, mExoPlayer.getPlayWhenReady());
         outState.putParcelable(STEP_KEY, mStepInfo);
         outState.putParcelableArrayList(STEPS_KEY, mStepsInfos);
-        outState.putLong(PLAYBACK_POS_KEY, mPlayBackPosition);
+        outState.putLong(PLAYBACK_POS_KEY,  mExoPlayer.getCurrentPosition());
     }
 
     private void initializePlayer() {
@@ -131,8 +149,9 @@ public class StepFragment extends Fragment implements View.OnClickListener {
             Uri uri = Uri.parse(mStepInfo.getVideoURL());
             MediaSource mediaSource = buildMediaSource(uri);
             mExoPlayer.prepare(mediaSource, true, false);
-            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.setPlayWhenReady(mIsPlayWhenReady);
             mPlayerView.setVisibility(View.VISIBLE);
+            previewTimeBar.setPreviewLoader(this);
         }
     }
 
@@ -144,7 +163,6 @@ public class StepFragment extends Fragment implements View.OnClickListener {
 
     private void releasePlayer() {
         if(mExoPlayer != null) {
-            mPlayBackPosition = mExoPlayer.getCurrentPosition();
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
@@ -152,18 +170,38 @@ public class StepFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        releasePlayer();
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+        }
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
+    public void onResume() {
+        super.onResume();
+        if ((Util.SDK_INT <= 23 || mExoPlayer == null)) {
+            initializePlayer();
+        }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(View v) {
         int currentIndex = mStepsInfos.indexOf(mStepInfo);
@@ -201,6 +239,7 @@ public class StepFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void setImmersiveMode() {
         View decorView = Objects.requireNonNull(getActivity()).getWindow().getDecorView();
         decorView.setSystemUiVisibility(
@@ -210,5 +249,16 @@ public class StepFragment extends Fragment implements View.OnClickListener {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    @Override
+    public void loadPreview(long currentPosition, long max) {
+        mExoPlayer.setPlayWhenReady(false);
+        Glide.with(mPreviewIv)
+                .load(mStepInfo.getThumbnailURL())
+                .apply(new RequestOptions()
+                    .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .transform(new GlideThumbnailTransformation(currentPosition)))
+                .into(mPreviewIv);
     }
 }

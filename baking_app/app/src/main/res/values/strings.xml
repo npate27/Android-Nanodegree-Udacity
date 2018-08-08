@@ -10,6 +10,4 @@
     <string name="add_to_widget">Add to Widget</string>
     <string name="recipe_iv_content_description">recipe_image</string>
     <string name="indicator_iv_content_description">Arrow/Play button</string>
-    <string name="exoplayer_play_content_description">Playback play</string>
-    <string name="exoplayer_pause_content_description">Playback pause</string>
 </resources>

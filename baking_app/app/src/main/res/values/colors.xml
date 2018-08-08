@@ -5,6 +5,4 @@
     <color name="colorAccent">#FF4081</color>
     <color name="blackAlpha">#70000000</color>
     <color name="greyAlpha">#10828282</color>
-    <color name="exoplayer_black">#CC000000</color>
-    <color name="exo_duration_color">#FFBEBEBE</color>
 </resources>

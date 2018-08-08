@@ -1,5 +1,7 @@
 package com.neelhpatel.bakingapp;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ public class IndividualRecipeActivity extends AppCompatActivity implements Steps
     private boolean isFirstBack;
     private RecipeInfo recipeInfo = null;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

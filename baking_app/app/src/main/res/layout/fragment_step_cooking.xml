@@ -39,7 +39,8 @@
         android:layout_marginEnd="@dimen/next_btn_margin_end"
         android:text="@string/next_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="@dimen/next_btn_margin_end" />
 
     <Button
         android:id="@+id/previous_btn"
@@ -49,6 +50,7 @@
         android:layout_marginStart="@dimen/prev_button_margin_start"
         android:text="@string/previous_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="@dimen/prev_button_margin_start" />
 
 </android.support.constraint.ConstraintLayout>

@@ -20,7 +20,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="test" />
+        tools:text="test"
+        android:layout_marginRight="@dimen/step_item_tv_margin_end"
+        android:layout_marginLeft="@dimen/step_item_tv_margin_start" />
 
     <ImageView
         android:id="@+id/indicator_iv"
@@ -33,6 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/step_item_tv"
         app:srcCompat="@drawable/ic_arrow_forward_black_24dp"
-        android:contentDescription="@string/indicator_iv_content_description" />
+        android:contentDescription="@string/indicator_iv_content_description"
+        android:layout_marginRight="@dimen/indicator_iv_margin_end" />
 
 </android.support.constraint.ConstraintLayout>

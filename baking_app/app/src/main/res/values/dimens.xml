@@ -4,10 +4,6 @@
     <dimen name="step_fragment_container_width">400dp</dimen>
     <dimen name="tablet_divider_view_width">1dp</dimen>
     <dimen name="step_container_container_padding">16dp</dimen>
-    <dimen name="exoplayer_playback_control_padding">4dp</dimen>
-    <dimen name="timebar_width">0dp</dimen>
-    <dimen name="timebar_height">26dp</dimen>
-    <dimen name="exo_duration_text_size">14sp</dimen>
     <dimen name="ingredient_tv_height">16dp</dimen>
     <dimen name="ingredient_tv_margin">16dp</dimen>
     <dimen name="ingredient_rv_margin_top">8dp</dimen>

@@ -28,7 +28,8 @@
                 android:layout_marginTop="@dimen/ingredient_tv_margin"
                 android:text="@string/ingredients_tv"
                 app:layout_constraintStart_toStartOf="@+id/ingredients_container"
-                app:layout_constraintTop_toTopOf="@+id/ingredients_container" />
+                app:layout_constraintTop_toTopOf="@+id/ingredients_container"
+                android:layout_marginLeft="@dimen/ingredient_tv_margin" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/ingredients_rv"

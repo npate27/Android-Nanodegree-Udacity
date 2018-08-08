@@ -1,8 +1,10 @@
 package com.neelhpatel.bakingapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         startActivity(intent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void onDataRecieved(ArrayList<RecipeInfo> recipeInfos) {
         mRecipeInfos = recipeInfos;
         mRecipeAdapter.changeData(mRecipeInfos);

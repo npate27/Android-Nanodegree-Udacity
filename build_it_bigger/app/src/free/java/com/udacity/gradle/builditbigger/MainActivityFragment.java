@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.neelhpatel.androidjokelib.JokeActivity;
+import com.udacity.gradle.builditbigger.task.EndpointsAsyncTask;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -28,21 +29,20 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@android.support.annotation.NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@android.support.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.jokeButton).setOnClickListener(this);
         mProgressBar = view.findViewById(R.id.progressBar);
 
         //Initialize and load Ad, start Joke activity after Ad is closed
-        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd = new InterstitialAd(java.util.Objects.requireNonNull(getContext()));
             mInterstitialAd.setAdUnitId(getString(R.string.interstitial_id));
             mInterstitialAd.loadAd(new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

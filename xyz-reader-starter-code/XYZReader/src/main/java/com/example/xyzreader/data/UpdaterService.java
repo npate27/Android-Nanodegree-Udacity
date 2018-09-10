@@ -1,6 +1,5 @@
 package com.example.xyzreader.data;
 
-import android.app.Activity;
 import android.app.IntentService;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
@@ -10,12 +9,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 
-import com.example.xyzreader.R;
 import com.example.xyzreader.remote.RemoteEndpointUtil;
 
 import org.json.JSONArray;
@@ -23,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UpdaterService extends IntentService {
     private static final String TAG = "UpdaterService";
@@ -42,7 +38,7 @@ public class UpdaterService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
+        NetworkInfo ni = Objects.requireNonNull(cm).getActiveNetworkInfo();
         if (ni == null || !ni.isConnected()) {
             Log.w(TAG, "Not online, not refreshing.");
             sendStickyBroadcast(
@@ -54,7 +50,7 @@ public class UpdaterService extends IntentService {
                 new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
 
         // Don't even inspect the intent, we only do one thing, and that's fetch content.
-        ArrayList<ContentProviderOperation> cpo = new ArrayList<ContentProviderOperation>();
+        ArrayList<ContentProviderOperation> cpo = new ArrayList<>();
 
         Uri dirUri = ItemsContract.Items.buildDirUri();
 

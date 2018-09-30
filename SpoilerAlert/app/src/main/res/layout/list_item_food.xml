@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="@dimen/cardview_margin"
+    android:layout_marginLeft="@dimen/cardview_margin"
+    android:layout_marginRight="@dimen/cardview_margin"
+    android:layout_marginTop="@dimen/cardview_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--suppress AndroidLintContentDescription -->
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thumbnail_height"
+            android:adjustViewBounds="true"
+            android:background="@color/photo_placeholder"
+            android:scaleType="centerCrop" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/item_title_tv"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Food#1" />
+
+            <TextView
+                android:id="@+id/item_location_tv"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_title"
+                tools:text="Pantry" />
+
+            <TextView
+                android:id="@+id/item_expiration_tv"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Expires " />
+
+            <ImageButton
+                android:id="@+id/delete_item_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_expiration_tv"
+                app:srcCompat="@drawable/ic_delete_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/edit_item_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                app:layout_constraintEnd_toStartOf="@+id/delete_item_btn"
+                app:layout_constraintTop_toBottomOf="@+id/item_expiration_tv"
+                app:srcCompat="@drawable/ic_edit_black_24dp" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

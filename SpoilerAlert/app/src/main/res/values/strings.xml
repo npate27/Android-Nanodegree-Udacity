@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Spoiler Alert!</string>
+
+    <!--Nav Bar Strings-->
+    <string name="expiring_btn_title">Expiring Soon</string>
+    <string name="locations_btn_title">Locations</string>
+    <string name="items_btn_title">Items</string>
+    <string name="settings_title">Settings</string>
+    <string name="dialog_delete_all_confirmation">Deleted data cannot be restored. Are you sure?</string>
+
+    <!--Expiring Soon Screen Strings-->
+    <string name="past_expiraiton_title">Past Expiration</string>
+    <string name="expires_today_title">Expires Today</string>
+    <string name="expires_week_title">Expires This Week</string>
+
+    <!--Item Detail Screen-->
+    <string name="item_location_label">Location</string>
+    <string name="expiration_label">Expires This Week</string>
+    <string name="purchase_label">Expires This Week</string>
+    <string name="price_label">Expires This Week</string>
+    <string name="quantity">Expires This Week</string>
+
+    <!--Item Creation Screen-->
+    <string name="item_name_placeholder">Enter Name Here</string>
+    <string name="location_dropdown_placeholder">Select Location</string>
+
+    <!--Add New Location Dialog-->
+    <string name="add_location_title">Add New Location</string>
+    <string name="placeholder_text">Type something here</string>
+    <string name="cancel_btn_text">CANCEL</string>
+    <string name="submit_btn_text">SUBMIT</string>
+
+    <!--Locations Screen-->
+    <string name="locations_title">Locations</string>
+    <string name="items_title">Items</string>
+
+    <!--Widget-->
+    <string name="widget_expiring_soon">Expiring Soon:</string>
+</resources>

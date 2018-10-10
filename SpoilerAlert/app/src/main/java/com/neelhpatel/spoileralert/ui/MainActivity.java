@@ -1,7 +1,5 @@
 package com.neelhpatel.spoileralert.ui;
 
-import android.app.ActivityOptions;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
@@ -12,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +17,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
+import com.neelhpatel.spoileralert.ModifyItemActivity;
 import com.neelhpatel.spoileralert.R;
 import com.neelhpatel.spoileralert.ui.nav.ExpiringFragment;
 import com.neelhpatel.spoileralert.ui.nav.ItemsFragment;
@@ -60,10 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-        = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        = item -> {
             switch (item.getItemId()) {
                 case R.id.expiring_nav_btn:
                     switchToFragment(new ExpiringFragment());
@@ -82,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
             return false;
-        }
-    };
+        };
 
     public void switchToFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
@@ -103,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-
                 }
 
                 @Override
@@ -113,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onAnimationRepeat(Animation animation) {
-
                 }
             });
             mFab.setAnimation(anim);
@@ -144,12 +136,18 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch(currentFragmentLayout) {
                 case EXPIRATION:
+                    break;
                 case LOCATIONS:
                     FragmentManager fm = getSupportFragmentManager();
                     AddLocationDialogFragment alertDialog = new AddLocationDialogFragment();
                     alertDialog.show(fm, "fragment_alert");
+                    break;
                 case ITEMS:
+                    Intent intent = new Intent(getApplicationContext(), ModifyItemActivity.class);
+                    startActivity(intent);
+                    break;
                 default:
+                    break;
             }
         }
     }

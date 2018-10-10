@@ -17,6 +17,9 @@ public interface LocationDao {
     @Query("SELECT * FROM locations")
     LiveData<List<LocationInfo>> loadAllLocations();
 
+    @Query("SELECT * FROM locations WHERE  l_id=:location_id")
+    LiveData<LocationInfo> loadLocationById(int location_id);
+
     @Insert
     long insertLocation(LocationInfo locationInfo);
 

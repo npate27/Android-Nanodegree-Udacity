@@ -7,15 +7,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="48sp"
         android:layout_margin="8dp"
         android:text="@string/locations_title"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/locations_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:transitionGroup="false"
+        android:clipChildren="false"/>
 
 </LinearLayout>

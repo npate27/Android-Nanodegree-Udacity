@@ -9,16 +9,21 @@
     <string name="dialog_delete_all_confirmation">Deleted data cannot be restored. Are you sure?</string>
 
     <!--Expiring Soon Screen Strings-->
-    <string name="past_expiraiton_title">Past Expiration</string>
+    <string name="past_expiration_title">Past Expiration</string>
     <string name="expires_today_title">Expires Today</string>
+    <string name="expires_tomorrow_title">Expires Tomorrow</string>
     <string name="expires_week_title">Expires This Week</string>
 
     <!--Item Detail Screen-->
     <string name="item_location_label">Location</string>
-    <string name="expiration_label">Expires This Week</string>
-    <string name="purchase_label">Expires This Week</string>
-    <string name="price_label">Expires This Week</string>
-    <string name="quantity">Expires This Week</string>
+    <string name="expiration_label">Expiration</string>
+    <string name="purchase_label">Purchased</string>
+    <string name="price_label">Price</string>
+    <string name="quantity_label">Quantity</string>
+    <string name="price_placeholder">$?.??</string>
+    <string name="quantity_placeholder">X lbs/boxes/etc.</string>
+    <string name="date_placeholder">mm/dd/yy</string>
+
 
     <!--Item Creation Screen-->
     <string name="item_name_placeholder">Enter Name Here</string>
@@ -36,4 +41,5 @@
 
     <!--Widget-->
     <string name="widget_expiring_soon">Expiring Soon:</string>
+    <string name="items_expiring">Expiration Timeline</string>
 </resources>

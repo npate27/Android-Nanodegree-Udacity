@@ -32,4 +32,9 @@ public class LocationInfo {
     public void setLocationName(String locationName) {
         this.locationName = locationName;
     }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
 }

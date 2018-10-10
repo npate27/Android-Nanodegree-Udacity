@@ -44,5 +44,4 @@ public interface ItemDao {
     @Update
     void updateItem(ItemInfo itemInfo);
 
-    //TODO: search by expiration dates
 }

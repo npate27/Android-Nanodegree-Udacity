@@ -20,6 +20,9 @@
         </activity>
         <activity android:name=".ui.settings.SettingsActivity"
             android:parentActivityName=".ui.MainActivity"/>
+        <activity android:name=".ModifyItemActivity"/>
+        <activity android:name=".ItemDetailActivity"/>
+        <activity android:name=".LocationItemsDetail"/>
     </application>
 
 </manifest>

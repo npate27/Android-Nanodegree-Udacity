@@ -3,6 +3,7 @@ package com.neelhpatel.spoileralert;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,7 @@ import com.neelhpatel.spoileralert.models.ItemInfo;
 import com.neelhpatel.spoileralert.models.LocationInfo;
 import com.neelhpatel.spoileralert.models.LocationViewModel;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +34,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.neelhpatel.spoileralert.ui.BarcodeScanningProcessor.UPC_KEY;
 
 public class ModifyItemActivity extends AppCompatActivity {
 
@@ -78,7 +87,6 @@ public class ModifyItemActivity extends AppCompatActivity {
         mPurchaseEv.setOnClickListener(new DateOnClickListener(mPurchaseEv));
         mPriceEv.addTextChangedListener(new CurrencyEditTextListener());
 
-
         LocationViewModel locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
         locationViewModel.getLocations().observe(this, locationInfos -> {
             locationStrings = locationInfos.stream().map(LocationInfo::getLocationName).collect(Collectors.toList());
@@ -102,6 +110,17 @@ public class ModifyItemActivity extends AppCompatActivity {
                 mQuantityEv.setText(mItemInfo.getQuantity());
                 mPriceEv.setText(Double.toString(mItemInfo.getPrice()));
                 mItemTitleEv.setText(mItemInfo.getItemName());
+            } else if (intent.getExtras() != null && intent.getExtras().containsKey(UPC_KEY)){
+                String barcode = getIntent().getStringExtra(UPC_KEY);
+                Retrofit.Builder builder = new Retrofit.Builder()
+                        .baseUrl("https://api.upcdatabase.org")
+                        .addConverterFactory(GsonConverterFactory.create());
+
+                Retrofit retrofit = builder.build();
+                BarcodeService service = retrofit.create(BarcodeService.class);
+
+                final Call<UPCItem> call = service.lookupBarcode(barcode, BuildConfig.upcAPIKey);
+                new NetworkCall().execute(call);
             }
         } else {
             //Get from previous existing item
@@ -234,6 +253,28 @@ public class ModifyItemActivity extends AppCompatActivity {
             mPriceEv.setSelection(formatted.length());
 
             mPriceEv.addTextChangedListener(this);
+        }
+    }
+
+    private class NetworkCall extends AsyncTask<Call, Void, UPCItem> {
+        @Override
+        protected UPCItem doInBackground(Call... calls) {
+            try {
+                Call<UPCItem> call = calls[0];
+                Response<UPCItem> response = call.execute();
+                return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(UPCItem result) {
+            if(result != null) {
+                mItemTitleEv.setText(result.getTitle());
+
+            }
         }
     }
 }

@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.neelhpatel.spoileralert.ModifyItemActivity;
 import com.neelhpatel.spoileralert.R;
 import com.neelhpatel.spoileralert.ui.nav.ExpiringFragment;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private FloatingActionButton mFab;
+    private FloatingActionButton mScanFab;
     private int currentFragmentLayout = EXPIRATION;
 
     @Override
@@ -53,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
         mFab = findViewById(R.id.fab);
         mFab.setOnClickListener(new FabOnClickListener());
+
+        mScanFab = findViewById(R.id.scan_fab);
+        mScanFab.setOnClickListener(new FabOnClickListener());
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -134,21 +142,31 @@ public class MainActivity extends AppCompatActivity {
     public class FabOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch(currentFragmentLayout) {
-                case EXPIRATION:
-                    break;
-                case LOCATIONS:
-                    FragmentManager fm = getSupportFragmentManager();
-                    AddLocationDialogFragment alertDialog = new AddLocationDialogFragment();
-                    alertDialog.show(fm, "fragment_alert");
-                    break;
-                case ITEMS:
-                    Intent intent = new Intent(getApplicationContext(), ModifyItemActivity.class);
-                    startActivity(intent);
+            switch(v.getId()) {
+                case R.id.fab:
+                    switch(currentFragmentLayout) {
+                        case EXPIRATION:
+                            break;
+                        case LOCATIONS:
+                            FragmentManager fm = getSupportFragmentManager();
+                            AddLocationDialogFragment alertDialog = new AddLocationDialogFragment();
+                            alertDialog.show(fm, "fragment_alert");
+                            break;
+                        case ITEMS:
+                            Intent intent = new Intent(getApplicationContext(), ModifyItemActivity.class);
+                            startActivity(intent);
+                            break;
+                        default:
+                            break;
+                    }
+                case R.id.scan_fab:
+                    FirebaseApp.initializeApp(getApplicationContext());
+                    startActivity(new Intent(MainActivity.this, LivePreviewActivity.class));
                     break;
                 default:
                     break;
             }
+
         }
     }
 }
